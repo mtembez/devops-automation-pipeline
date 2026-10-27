@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+*.egg
+
+# Virtual Environment
+.venv/
+env/
+venv/
+
+# Environment Variables
+.env
+*.env.local
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Logs & Runtime
+*.log
+nginx/active_upstream.conf.tmp
+deploy_state.json
+
+# OS / Editor
+.DS_Store
+.idea/
+.vscode/
