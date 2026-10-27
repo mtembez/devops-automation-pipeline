@@ -20,7 +20,7 @@ T_START=$(date +%s%N 2>/dev/null || python3 -c 'import time; print(int(time.time
 for i in $(seq 1 "${REQUEST_COUNT}"); do
     CODE=0
     if command -v curl >/dev/null 2>&1; then
-        CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "X-Canary: true" --max-time 3 "${TARGET_URL}" || echo "000")
+        CODE=$(curl -s -o /dev/null -w "%{http_code}" -H "X-Canary: true" --max-time 3 "${TARGET_URL}" 2>/dev/null) || CODE="000"
     else
         CODE=$(python3 -c "
 import urllib.request

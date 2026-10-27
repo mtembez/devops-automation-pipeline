@@ -174,7 +174,7 @@ def application(environ: dict, start_response: Callable) -> List[bytes]:
 
 if __name__ == "__main__":
     from wsgiref.simple_server import make_server
-    port = int(os.getenv("PORT", "8000"))
+    port = int(os.getenv("PORT", "8080"))
     logger.info("Starting microservice on port %d [Slot: %s, Version: %s]...", port, DEPLOYMENT_SLOT, RELEASE_VERSION)
     with make_server("0.0.0.0", port, application) as httpd:
         httpd.serve_forever()

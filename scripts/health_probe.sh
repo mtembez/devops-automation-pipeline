@@ -19,9 +19,9 @@ while [ "${ATTEMPT}" -le "${MAX_RETRIES}" ]; do
     RESPONSE_BODY=""
 
     if command -v curl >/dev/null 2>&1; then
-        HTTP_CODE=$(curl -s -o /tmp/health_probe_body.txt -w "%{http_code}" --max-time "${TIMEOUT_SECONDS}" "${TARGET_URL}" || echo "000")
+        HTTP_CODE=$(curl -s -o /tmp/health_probe_body.txt -w "%{http_code}" --max-time "${TIMEOUT_SECONDS}" "${TARGET_URL}" 2>/dev/null) || HTTP_CODE="000"
         if [ -f /tmp/health_probe_body.txt ]; then
-            RESPONSE_BODY=$(cat /tmp/health_probe_body.txt)
+            RESPONSE_BODY=$(cat /tmp/health_probe_body.txt 2>/dev/null || true)
             rm -f /tmp/health_probe_body.txt
         fi
     elif command -v python3 >/dev/null 2>&1; then

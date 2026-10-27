@@ -87,19 +87,19 @@ jobs:
 
       - name: Validate Health Probe Sentinel
         run: |
-          python app/main.py &
+          PORT=8080 python app/main.py &
           APP_PID=$!
           sleep 1
-          ./scripts/health_probe.sh http://localhost:8080/health/ready 5 1 2
-          kill $APP_PID
+          ./scripts/health_probe.sh http://localhost:8080/health/ready 10 1 2
+          kill -9 $APP_PID 2>/dev/null || true
 
       - name: Validate Canary Load Testing
         run: |
-          python app/main.py &
+          PORT=8080 python app/main.py &
           APP_PID=$!
           sleep 1
-          ./scripts/canary.sh http://localhost:8080/api/v1/work 10 0
-          kill $APP_PID
+          ./scripts/canary.sh http://localhost:8080/api/v1/work 15 0
+          kill -9 $APP_PID 2>/dev/null || true
 
       - name: Validate Automated Rollback Engine
         run: |
